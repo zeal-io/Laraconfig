@@ -58,15 +58,15 @@ class SettingsCollection extends Collection
      *
      * @return \Illuminate\Support\Carbon|\Illuminate\Support\Collection|array|string|int|float|bool|null
      */
-    public function value(string $name, mixed $default = null): Carbon|Collection|array|string|int|float|bool|null
+    public function value($key, $default = null)
     {
-        $setting = $this->get($name, $default);
+        $setting = $this->get($key, $default);
 
         if ($setting instanceof Eloquent\Setting) {
             return $setting->value;
         }
 
-        return $setting;
+        return parent::value($key, $default);
     }
 
     /**

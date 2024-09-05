@@ -91,6 +91,9 @@ class SettingsCache implements Serializable
      */
     public function regenerate(bool $force = false): void
     {
+        if(!isset($this->cache)){
+            return;
+        }
         if ($force || $this->shouldRegenerate()) {
             $this->cache->setMultiple([
                 $this->key => $this->settings,
@@ -135,7 +138,7 @@ class SettingsCache implements Serializable
         // Just a simple trick to regenerate only if it's enabled.
         $this->settings->regeneratesOnExit = $this->automaticRegeneration;
     }
-    
+
     /**
      * representation of object.
      *
